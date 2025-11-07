@@ -1,0 +1,19 @@
+.DS_STORE
+node_modules/
+dist/*
+!dist/libraries/
+vendor/
+build/
+*.zip
+configs.json
+languages/
+webpack.log
+
+# Cypress
+.wp-env.override.json
+artifacts
+tests/cypress/fixtures
+tests/cypress/downloads
+tests/cypress/screenshots
+tests/cypress/videos
+tests/cypress/reports

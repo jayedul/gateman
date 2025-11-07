@@ -1,0 +1,34 @@
+.slr-logon-form {
+	max-width: 500px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+}
+
+.slr-logon-form > label {
+	display: block;
+	font-weight: 500;
+	font-size: 16px;
+	margin: 0 0 5px;
+}
+
+.slr-logon-form input[type=text],
+.slr-logon-form input[type=email],
+.slr-logon-form input[type=password] {
+	display: block;
+	width: 100%;
+}
+
+.slr-logon-form button[type=submit] {
+	display: block;
+	width: 100%;
+}
+
+.slr-logon-form .slr-logged-in {
+	text-align: center;
+}
+
+.slr-logon-form .slr-error-message {
+	color: #aa0000;
+}

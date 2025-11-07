@@ -1,0 +1,30 @@
+{
+    "name": "devjk/simple-login-registration",
+    "license": "gpl-v3",
+    "autoload": {
+        "psr-4": {
+      		"DevJK\\SLR\\": "classes/"
+		}
+    },
+    "scripts": {
+        "lint": "phpcs --extensions=php -s .",
+        "lint:fix": "phpcbf --extensions=php ."
+    },
+	"require": {
+		"devjk/wp-toolkit": "dev-main"
+	},
+    "require-dev": {
+        "10up/phpcs-composer": "dev-master"
+    },
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/jayedul/wordpress-toolkit"
+		}
+	],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
