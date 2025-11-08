@@ -4,6 +4,7 @@ namespace DevJK\SLR\Setup;
 
 use DevJK\SLR\Main;
 use DevJK\SLR\Models\Logon;
+use DevJK\WPToolkit\_Array;
 
 class Shortcode {
 
@@ -23,8 +24,8 @@ class Shortcode {
 		return $this->render( self::LOGIN );
 	}
 	
-	public function registration():string {
-		return $this->render( self::REGISTRATION );
+	public function registration( $attrs = null ):string {
+		return $this->render( self::REGISTRATION, $attrs );
 	}
 	
 	public function recoverPassword():string {
@@ -35,13 +36,15 @@ class Shortcode {
 		return $this->render( self::RESET_PASSWORD );
 	}
 
-	private function render( string $current_form ):string {
+	private function render( string $current_form, $args = null ):string {
+
+		$atts = _Array::getArray( $args );
 		
 		$current_form = str_replace( 'slr_', '', $current_form );
 
 		if ( sanitize_text_field( $_POST['slr_form_submit'] ?? '' ) === 'yes' ) {
 			
-			$resp = Logon::applyAction( $current_form );
+			$resp = Logon::applyAction( $current_form, $atts );
 
 			// Empty means 
 			if ( $resp['action'] === 'error' ) {
