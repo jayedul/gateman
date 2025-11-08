@@ -1,19 +1,26 @@
 <?php
-
+/**
+ * Init SLR plugin
+ */
 namespace DevJK\SLR;
 
 use DevJK\SLR\Setup\Installer;
+use DevJK\SLR\Setup\PageFlag;
 use DevJK\SLR\Setup\Redirect;
 use DevJK\SLR\Setup\Scripts;
+use DevJK\SLR\Setup\SettingsPage;
 use DevJK\SLR\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 use DevJK\WPToolkit\Dispatcher;
 use DevJK\WPToolkit\Utilities;
 
+/**
+ * Main entrypoint class
+ */
 class Main {
 
 	const ACT_HOOK = 'slr_plugin_activated';
-	const DB_HOOK = 'slr_plugin_db_deployed';
+	const DB_HOOK  = 'slr_plugin_db_deployed';
 
 	/**
 	 * Static data to reuse across Tutor Studio plugin
@@ -32,7 +39,8 @@ class Main {
 	/**
 	 * Initialize the plugin
 	 *
-	 * @param object $configs
+	 * @param  object $configs Runtime config object
+	 *
 	 * @return void
 	 */
 	public function init( object $configs ) {
@@ -53,13 +61,13 @@ class Main {
 		new Scripts();
 		new Shortcode();
 		new Redirect();
-		
+		new SettingsPage();
+		new PageFlag();
+
 		// Register ajax endpoints
 		new Dispatcher(
 			self::$configs->app_id,
-			array(
-				
-			)
+			array()
 		);
 	}
 

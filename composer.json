@@ -7,14 +7,15 @@
 		}
     },
     "scripts": {
-        "lint": "phpcs --extensions=php -s .",
-        "lint:fix": "phpcbf --extensions=php ."
+        "lint": "phpcs --standard=WordPress --extensions=php -s ./classes",
+        "lint:fix": "phpcbf --standard=WordPress --extensions=php ./classes"
     },
 	"require": {
 		"devjk/wp-toolkit": "dev-main"
 	},
     "require-dev": {
-        "10up/phpcs-composer": "dev-master"
+        "10up/phpcs-composer": "dev-master",
+        "wp-coding-standards/wpcs": "^2.3"
     },
 	"repositories": [
 		{

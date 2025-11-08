@@ -6,6 +6,7 @@ use DevJK\SLR\Main;
 
 class Scripts {
 
+
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'loadFormScripts' ) );
 	}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be14229203f494b0790c6ac1bbaea08b",
+    "content-hash": "15cb6f0bf7967175d757d44894c92e95",
     "packages": [
         {
             "name": "devjk/wp-toolkit",
