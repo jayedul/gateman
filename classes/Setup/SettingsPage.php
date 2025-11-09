@@ -32,8 +32,8 @@ class SettingsPage {
 	 */
 	public function addPage() {
 		add_options_page(
-			__( 'Simple Login', 'slr' ),
-			__( 'Simple Login', 'slr' ),
+			__( 'Simple Login', 'simple-login-registration' ),
+			__( 'Simple Login', 'simple-login-registration' ),
 			'manage_options',
 			'simple-login',
 			array( $this, 'renderPage' )
@@ -52,7 +52,7 @@ class SettingsPage {
 
 		add_settings_section(
 			'simple_login_section',
-			__( 'Simple Login Settings', 'slr' ),
+			__( 'Simple Login Settings', 'simple-login-registration' ),
 			'__return_false',
 			'simple-login'
 		);
@@ -67,7 +67,7 @@ class SettingsPage {
 
 		add_settings_field(
 			'agreement_page_ids',
-			'Agreement Page IDs (comma-separated)',
+			__( 'Agreement Page IDs (comma-separated)', 'simple-login-registration' ),
 			array( $this, 'field_agreement_page_ids' ),
 			'simple-login',
 			'simple_login_section'
@@ -96,16 +96,20 @@ class SettingsPage {
 	 * Render checkbox field
 	 */
 	public function field_replace_wp_login() {
-		$checked = ! empty( Settings::getOption( 'replace_wp_login' ) ) ? 'checked' : '';
-		echo '<label><input type="checkbox" name="' . esc_attr( Settings::OPTION_NAME ) . '[replace_wp_login]" value="1" ' . $checked . '> Enable</label>';
+		echo '<label>
+			<input 
+				type="checkbox" 
+				name="' . esc_attr( Settings::OPTION_NAME ) . '[replace_wp_login]" value="1" 
+				' . checked( true, ! empty( Settings::getOption( 'replace_wp_login' ) ), false ) . '
+			> Enable
+		</label>';
 	}
 
 	/**
 	 * Render text field for page IDs
 	 */
 	public function field_agreement_page_ids() {
-		$value = esc_attr( Settings::getOption( 'agreement_page_ids', '' ) );
-		echo '<input type="text" name="' . esc_attr( Settings::OPTION_NAME ) . '[agreement_page_ids]" value="' . $value . '" class="regular-text">';
+		echo '<input type="text" name="' . esc_attr( Settings::OPTION_NAME ) . '[agreement_page_ids]" value="' . esc_attr( Settings::getOption( 'agreement_page_ids', '' ) ) . '" class="regular-text">';
 	}
 
 	/**

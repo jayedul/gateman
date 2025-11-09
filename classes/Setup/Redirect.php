@@ -110,26 +110,18 @@ class Redirect {
 			return;
 		}
 
-		// your custom login page slug
-		$custom_slug = 'custom-login';
-
 		// if current script is wp-login.php
-		$current_script = basename( $_SERVER['PHP_SELF'] ?? '' );
+		$current_script = basename( sanitize_text_field( wp_unslash( $_SERVER['PHP_SELF'] ?? '' ) ) );
 		if ( $current_script !== 'wp-login.php' ) {
 			return;
 		}
 
 		// Allow exceptions (like admin-post.php actions)
-		$action = $_GET['action'] ?? 'login';
+		$action = Shortcode::$input['action'] ?? 'login';
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
 		}
 		if ( $action === 'logout' ) {
-			return;
-		}
-
-		// avoid redirect loop if already accessing custom slug through internal include
-		if ( strpos( $_SERVER['REQUEST_URI'], "/$custom_slug" ) !== false ) {
 			return;
 		}
 
@@ -139,8 +131,8 @@ class Redirect {
 
 		// Preserve relevant query params (action, redirect_to, reauth)
 		foreach ( array( 'redirect_to', 'reauth' ) as $key ) {
-			if ( ! empty( $_GET[ $key ] ) ) {
-				$query[ $key ] = $_GET[ $key ];
+			if ( ! empty( Shortcode::$input[ $key ] ) ) {
+				$query[ $key ] = Shortcode::$input[ $key ];
 			}
 		}
 

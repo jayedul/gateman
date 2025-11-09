@@ -3,6 +3,7 @@
 namespace DevJK\SLR\Models;
 
 use DevJK\SLR\Enums\Pages;
+use DevJK\SLR\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 use DevJK\WPToolkit\_String;
 
@@ -15,7 +16,7 @@ class Logon {
 	 * @param  string $form
 	 * @return array
 	 */
-	public static function getFields( string $form ):array {
+	public static function getFields( string $form = '' ):array {
 
 		static $fields = null;
 
@@ -24,7 +25,7 @@ class Logon {
 			$fields = _Array::getArray( $fields );
 		}
 
-		return apply_filters( 'slr_form_fields', ( $fields[ $form ] ?? array() ), $form );
+		return apply_filters( 'slr_form_fields', ( ! empty( $form ) ? _Array::getArray( $fields[ $form ] ?? array() ) : $fields ), $form );
 	}
 
 	public static function getUniqueUsername( $username ) {
@@ -55,9 +56,9 @@ class Logon {
 			// Make login
 			case Pages::LOGIN->value:
 				return self::makeLogin(
-					sanitize_text_field( $_POST['username'] ?? '' ),
-					( $_POST['password'] ?? '' ),
-					sanitize_text_field( $_POST['remember'] ?? '' ) === 'yes'
+					sanitize_text_field( Shortcode::$input['username'] ?? '' ),
+					( Shortcode::$input['password'] ?? '' ),
+					sanitize_text_field( Shortcode::$input['remember'] ?? '' ) === 'yes'
 				);
 			break;
 
@@ -66,21 +67,21 @@ class Logon {
 				if ( empty( get_option( 'users_can_register' ) ) ) {
 					return array(
 						'type'    => 'error',
-						'message' => __( 'Registration is disabled', 'slr' ),
+						'message' => __( 'Registration is disabled', 'simple-login-registration' ),
 					);
 				}
 
-				$first_name = ucwords( strtolower( sanitize_text_field( $_POST['first_name'] ?? '' ) ) );
-				$last_name  = ucwords( strtolower( sanitize_text_field( $_POST['first_name'] ?? '' ) ) );
+				$first_name = ucwords( strtolower( sanitize_text_field( Shortcode::$input['first_name'] ?? '' ) ) );
+				$last_name  = ucwords( strtolower( sanitize_text_field( Shortcode::$input['first_name'] ?? '' ) ) );
 
 				// Prepare registration data
 				$form = array(
 					'first_name'   => $first_name,
 					'last_name'    => $last_name,
 					'display_name' => $first_name . ' ' . $last_name,
-					'user_login'   => self::getUniqueUsername( sanitize_text_field( $_POST['username'] ) ),
-					'user_email'   => sanitize_text_field( $_POST['email'], '' ),
-					'user_pass'    => $_POST['password'] ?? '',
+					'user_login'   => self::getUniqueUsername( sanitize_text_field( Shortcode::$input['username'] ) ),
+					'user_email'   => sanitize_text_field( Shortcode::$input['email'], '' ),
+					'user_pass'    => Shortcode::$input['password'] ?? '',
 					'role'         => ! empty( $args['role'] ) ? $args['role'] : 'subscriber',
 				);
 
@@ -88,12 +89,12 @@ class Logon {
 				if ( empty( $form['first_name'] )
 				|| empty( $form['last_name'] )
 				|| empty( $form['user_login'] )
-				|| empty( $_POST['password'] )
-				|| $_POST['password'] !== ( $_POST['retype_password'] ?? '' )
+				|| empty( Shortcode::$input['password'] )
+				|| Shortcode::$input['password'] !== ( Shortcode::$input['retype_password'] ?? '' )
 				) {
 					return array(
 						'type'    => 'error',
-						'message' => __( 'All fields are required', 'slr' ),
+						'message' => __( 'All fields are required', 'simple-login-registration' ),
 					);
 				}
 
@@ -112,7 +113,7 @@ class Logon {
 
 			// Send OTP code to reset password
 			case Pages::RECOVER_PASSWORD->value:
-				$email        = sanitize_text_field( $_POST['email'] ?? '' );
+				$email        = sanitize_text_field( Shortcode::$input['email'] ?? '' );
 				$md5_mail     = md5( $email );
 				$rate_limit   = new RateLimit( 'otp-' . $md5_mail, 60, 2 );
 				$rate_limited = $rate_limit->limit( true ) === true;
@@ -123,18 +124,20 @@ class Logon {
 				if ( $rate_limited || ! email_exists( $email ) ) {
 					return array(
 						'type'    => 'error',
-						'message' => $rate_limited ? __( 'Too many attempt', 'slr' ) : __( 'User does not exist', 'slr' ),
+						'message' => $rate_limited ? __( 'Too many attempt', 'simple-login-registration' ) : __( 'User does not exist', 'simple-login-registration' ),
 					);
 				}
 
 				// Generate the OTP, store and send to mail
-				$otp = strtoupper( substr( _String::getRandomString( '', '' ), 1, 8 ) );
+				$otp = str_shuffle( strtoupper( substr( _String::getRandomString( '', '' ), 1, 8 ) ) );
 				set_transient( 'slr_otp_' . $md5_mail, $otp, 60 * 30 );
 
 				wp_mail(
 					$email,
-					apply_filters( 'slr_otp_mail_subject', __( 'Password Reset OTP Code | ' . get_bloginfo( 'name' ) ), $email ),
-					apply_filters( 'slr_otp_mail_body', sprintf( __( 'Your OTP code is %s', 'slr' ), $otp ), $otp )
+					// translators: 1: Site title
+					apply_filters( 'slr_otp_mail_subject', sprintf( __( 'Password Reset OTP Code | %s', 'simple-login-registration' ), get_bloginfo( 'name' ) ), $email ),
+					// translators: 1: OTP code
+					apply_filters( 'slr_otp_mail_body', sprintf( __( 'Your OTP code is %s', 'simple-login-registration' ), $otp ), $otp )
 				);
 
 				return array(
@@ -145,10 +148,10 @@ class Logon {
 
 			// Reset password with OTP code and email.
 			case Pages::RESET_PASSWORD->value:
-				$otp          = sanitize_text_field( $_POST['otp_code'] ?? '' );
-				$password     = $_POST['password'] ?? '';
-				$ret_pass     = $_POST['retype_password'] ?? '';
-				$email        = sanitize_text_field( $_GET['recovery_email'] ?? '' );
+				$otp          = sanitize_text_field( Shortcode::$input['otp_code'] ?? '' );
+				$password     = Shortcode::$input['password'] ?? '';
+				$ret_pass     = Shortcode::$input['retype_password'] ?? '';
+				$email        = sanitize_text_field( Shortcode::$input['recovery_email'] ?? '' );
 				$md5_mail     = md5( $email );
 				$rate_limit   = new RateLimit( 'otp-verify-' . $md5_mail, 60 * 2, 3 );
 				$rate_limited = $rate_limit->limit( true ) === true;
@@ -164,16 +167,9 @@ class Logon {
 				|| $trans_code !== $otp
 				|| ! email_exists( $email )
 				) {
-
-					error_log( var_export( $otp, true ) );
-					error_log( var_export( $email, true ) );
-					error_log( var_export( $password, true ) );
-					error_log( var_export( $trans_code, true ) );
-					error_log( var_export( email_exists( $email ), true ) );
-
 					return array(
 						'type'    => 'error',
-						'message' => $rate_limited ? __( 'Too many attempts', 'slr' ) : __( 'Invalid submission or session expired', 'slr' ),
+						'message' => $rate_limited ? __( 'Too many attempts', 'simple-login-registration' ) : __( 'Invalid submission or session expired', 'simple-login-registration' ),
 					);
 				}
 
@@ -187,7 +183,7 @@ class Logon {
 			default:
 				return array(
 					'type'    => 'error',
-					'message' => __( 'Invalid action', 'slr' ),
+					'message' => __( 'Invalid action', 'simple-login-registration' ),
 				);
 				break;
 		}

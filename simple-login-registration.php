@@ -1,16 +1,17 @@
 <?php
 /**
- * Plugin Name: Simple Login & Registration
+ * Plugin Name: Simple Login Registration
  * Plugin URI: https://wordpress.org/plugins/simple-login-registration/
- * Description: A minimal, secure login and registration plugin without unnecessary bloat.
+ * Description: Light weight login and registration plugin without unnecessary heavy fatures.
  * Version: 1.0.0
- * Author: DevJK
- * Author URI: https://devjk.com
- * Text Domain: slr
- * Requires at least: 6.7
+ * Author: JK
+ * Author URI: https://www.linkedin.com/in/jayedulk/
+ * Requires at least: 5.3
  * Requires PHP: 7.4
+ * License: GPLv2 or later
+ * Text Domain: simple-login-registration
  *
- * @package devjk/simple-login-registration
+ * @package devjk/slr
  */
 
 use DevJK\SLR\Main;

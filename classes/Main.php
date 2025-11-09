@@ -19,9 +19,6 @@ use DevJK\WPToolkit\Utilities;
  */
 class Main {
 
-	const ACT_HOOK = 'slr_plugin_activated';
-	const DB_HOOK  = 'slr_plugin_db_deployed';
-
 	/**
 	 * Static data to reuse across Tutor Studio plugin
 	 *
@@ -48,11 +45,9 @@ class Main {
 		self::$configs = $configs;
 
 		// Prepare runtime data
-		$manifest                        = _Array::getManifestArray( self::$configs->file, ARRAY_A );
-		self::$configs                   = (object) array_merge( $manifest, (array) self::$configs );
-		self::$configs->app_id           = Utilities::getAppId( trailingslashit( get_home_url() ) . 'wp-content/plugins/simple-login-registration/' );
-		self::$configs->activation_hook  = self::ACT_HOOK;
-		self::$configs->db_deployed_hook = self::DB_HOOK;
+		$manifest              = _Array::getManifestArray( self::$configs->file, ARRAY_A );
+		self::$configs         = (object) array_merge( $manifest, (array) self::$configs );
+		self::$configs->app_id = Utilities::getAppId( trailingslashit( get_home_url() ) . 'wp-content/plugins/simple-login-registration/' );
 
 		// Register Activation/Deactivation Hook
 		register_activation_hook( self::$configs->file, array( $this, 'activate' ) );
@@ -77,6 +72,6 @@ class Main {
 	 * @return void
 	 */
 	public static function activate() {
-		do_action( self::ACT_HOOK );
+		do_action( 'slr_plugin_activated' );
 	}
 }

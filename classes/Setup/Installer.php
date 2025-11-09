@@ -10,7 +10,7 @@ class Installer {
 
 
 	public function __construct() {
-		add_action( Main::ACT_HOOK, array( $this, 'createPages' ) );
+		add_action( 'slr_plugin_activated', array( $this, 'createPages' ) );
 	}
 
 	public function createPages() {

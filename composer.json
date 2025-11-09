@@ -7,8 +7,8 @@
 		}
     },
     "scripts": {
-        "lint": "phpcs --standard=WordPress --extensions=php -s ./classes",
-        "lint:fix": "phpcbf --standard=WordPress --extensions=php ./classes"
+        "lint": "phpcs --standard=WordPress --extensions=php -s ./classes ./templates",
+        "lint:fix": "phpcbf --standard=WordPress --extensions=php ./classes ./templates"
     },
 	"require": {
 		"devjk/wp-toolkit": "dev-main"

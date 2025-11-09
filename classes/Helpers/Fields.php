@@ -9,95 +9,95 @@ return array(
 	'login'            => array(
 		'fields' => array(
 			'username' => array(
-				'label'       => __( 'Username or Email', 'slr' ),
-				'placeholder' => __( 'Enter your username or email', 'slr' ),
+				'label'       => __( 'Username or Email', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your username or email', 'simple-login-registration' ),
 				'type'        => 'text',
 			),
 			'password' => array(
-				'label'       => __( 'Password', 'slr' ),
-				'placeholder' => __( 'Enter your password', 'slr' ),
+				'label'       => __( 'Password', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your password', 'simple-login-registration' ),
 				'type'        => 'password',
 			),
 		),
 		'submit' => array(
-			'label' => __( 'Login', 'slr' ),
+			'label' => __( 'Login', 'simple-login-registration' ),
 		),
 	),
 	'registration'     => array(
 		'fields' => array(
 			'first_name'      => array(
-				'label'       => __( 'First Name', 'slr' ),
-				'placeholder' => __( 'Enter your first name', 'slr' ),
+				'label'       => __( 'First Name', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your first name', 'simple-login-registration' ),
 				'type'        => 'text',
 			),
 			'last_name'       => array(
-				'label'       => __( 'Last Name', 'slr' ),
-				'placeholder' => __( 'Enter your last name', 'slr' ),
+				'label'       => __( 'Last Name', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your last name', 'simple-login-registration' ),
 				'type'        => 'text',
 			),
 			'username'        => array(
-				'label'       => __( 'Username', 'slr' ),
-				'placeholder' => __( 'Enter your username', 'slr' ),
+				'label'       => __( 'Username', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your username', 'simple-login-registration' ),
 				'type'        => 'text',
 			),
 			'email'           => array(
-				'label'       => __( 'Email', 'slr' ),
-				'placeholder' => __( 'Enter your email', 'slr' ),
+				'label'       => __( 'Email', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your email', 'simple-login-registration' ),
 				'type'        => 'email',
 			),
 			'password'        => array(
-				'label'       => __( 'Password', 'slr' ),
-				'placeholder' => __( 'Enter your password', 'slr' ),
+				'label'       => __( 'Password', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your password', 'simple-login-registration' ),
 				'type'        => 'password',
 			),
 			'retype_password' => array(
-				'label'       => __( 'Re-type Password', 'slr' ),
-				'placeholder' => __( 'Enter your password again', 'slr' ),
+				'label'       => __( 'Re-type Password', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your password again', 'simple-login-registration' ),
 				'type'        => 'password',
 			),
 		),
 		'submit' => array(
-			'label' => __( 'Register', 'slr' ),
+			'label' => __( 'Register', 'simple-login-registration' ),
 		),
 	),
 	'recover_password' => array(
 		'fields' => array(
 			'email' => array(
-				'label'       => __( 'Email', 'slr' ),
-				'placeholder' => __( 'Enter your account email', 'slr' ),
+				'label'       => __( 'Email', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your account email', 'simple-login-registration' ),
 				'type'        => 'text',
 			),
 		),
 		'submit' => array(
-			'label' => __( 'Send OTP code', 'slr' ),
+			'label' => __( 'Send OTP code', 'simple-login-registration' ),
 		),
 	),
 	'reset_password'   => array(
 		'fields' => array(
-			'recovery_email'           => array(
-				'label'       => __( 'Email', 'slr' ),
-				'placeholder' => __( 'Enter your email', 'slr' ),
+			'recovery_email'  => array(
+				'label'       => __( 'Email', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter your email', 'simple-login-registration' ),
 				'type'        => 'email',
 				'disabled'    => true,
 			),
 			'otp_code'        => array(
-				'label'       => __( 'OTP Code', 'slr' ),
-				'placeholder' => __( 'Enter OTP code sent to email', 'slr' ),
+				'label'       => __( 'OTP Code', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter OTP code sent to email', 'simple-login-registration' ),
 				'type'        => 'text',
 			),
 			'password'        => array(
-				'label'       => __( 'New Password', 'slr' ),
-				'placeholder' => __( 'Enter new password', 'slr' ),
+				'label'       => __( 'New Password', 'simple-login-registration' ),
+				'placeholder' => __( 'Enter new password', 'simple-login-registration' ),
 				'type'        => 'password',
 			),
 			'retype_password' => array(
-				'label'       => __( 'Re-type New Password', 'slr' ),
-				'placeholder' => __( 'Re-type new password', 'slr' ),
+				'label'       => __( 'Re-type New Password', 'simple-login-registration' ),
+				'placeholder' => __( 'Re-type new password', 'simple-login-registration' ),
 				'type'        => 'password',
 			),
 		),
 		'submit' => array(
-			'label' => __( 'Reset Password', 'slr' ),
+			'label' => __( 'Reset Password', 'simple-login-registration' ),
 		),
 	),
 );

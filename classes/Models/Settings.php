@@ -3,6 +3,7 @@
 namespace DevJK\SLR\Models;
 
 use DevJK\SLR\Enums\Pages;
+use DevJK\SLR\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 
 class Settings {
@@ -15,7 +16,7 @@ class Settings {
 	 * Get SLR option value
 	 *
 	 * @param string $key
-	 * @param mixed $def
+	 * @param mixed  $def
 	 * @return mixed
 	 */
 	public static function getOption( string $key, $def = null ) {
@@ -68,7 +69,7 @@ class Settings {
 				)
 			);
 		}
-		
+
 		return $page_id;
 	}
 
@@ -83,13 +84,13 @@ class Settings {
 		$page_id = self::getPageID( $page );
 
 		$args = array();
-		
-		if ( ! empty( $_GET['redirect_to'] ) ) {
-			$args['redirect_to'] = $_GET['redirect_to'];
+
+		if ( ! empty( Shortcode::$input['redirect_to'] ) ) {
+			$args['redirect_to'] = Shortcode::$input['redirect_to'];
 		}
-		
-		if ( ! empty( $_GET['reauth'] ) ) {
-			$args['reauth'] = $_GET['reauth'];
+
+		if ( ! empty( Shortcode::$input['reauth'] ) ) {
+			$args['reauth'] = Shortcode::$input['reauth'];
 		}
 
 		return add_query_arg( apply_filters( 'slr_permalink_args', $args ), get_permalink( $page_id ) );
@@ -112,7 +113,7 @@ class Settings {
 
 		$pattern = get_shortcode_regex( array( $page->value ) );
 
-		if ( preg_match_all('/' . $pattern . '/s', $content, $matches, PREG_SET_ORDER) ) {
+		if ( preg_match_all( '/' . $pattern . '/s', $content, $matches, PREG_SET_ORDER ) ) {
 			foreach ( $matches as $shortcode ) {
 				if ( $page->value === $shortcode[2] ) {
 					return _Array::getArray( shortcode_parse_atts( $shortcode[3] ) );
