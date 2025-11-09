@@ -41,7 +41,12 @@ endif;
 endif;
 ?>
 
-<form class="slr-logon-form <?php echo esc_attr( $current_page ); ?>" method="POST" enctype="multipart/form-data">
+<form class="slr-logon-form 
+<?php
+echo esc_attr( $current_page ) . ' ';
+echo Settings::getOption( 'use_slr_css', true ) ? 'slr-use-css' : '';
+?>
+" method="POST" enctype="multipart/form-data">
 
 	<?php do_action( 'slr_fields_before', $current_page ); ?>
 
@@ -53,6 +58,7 @@ endif;
 			</label>
 			<input 
 				id="<?php echo esc_attr( 'slr_field_id_' . $slr_name ); ?>"
+				class="slr-input"
 				name="<?php echo esc_attr( $slr_name ); ?>"
 				value="<?php $slr_field['type'] !== 'password' ? esc_attr( sanitize_text_field( Shortcode::$input[ $slr_name ] ?? '' ) ) : ''; ?>"
 				type="<?php echo esc_attr( $slr_field['type'] ); ?>" 
@@ -81,7 +87,7 @@ endif;
 		<?php wp_nonce_field(); ?>
 
 		<div>
-			<button type="submit">
+			<button type="submit" class="slr-button">
 				<?php echo esc_html( apply_filters( 'slr_submit_button_label', $submit['label'], $current_page ) ); ?>
 			</button>
 		</div>

@@ -66,6 +66,14 @@ class SettingsPage {
 		);
 
 		add_settings_field(
+			'use_slr_css',
+			'Use SLR css (Uncheck to inherit style from theme)',
+			array( $this, 'field_use_slr_css' ),
+			'simple-login',
+			'simple_login_section'
+		);
+
+		add_settings_field(
 			'agreement_page_ids',
 			__( 'Agreement Page IDs (comma-separated)', 'simple-login-registration' ),
 			array( $this, 'field_agreement_page_ids' ),
@@ -81,6 +89,7 @@ class SettingsPage {
 		$output = array();
 
 		$output['replace_wp_login'] = ! empty( $input['replace_wp_login'] ) ? 1 : 0;
+		$output['use_slr_css']      = ! empty( $input['use_slr_css'] ) ? 1 : 0;
 
 		if ( ! empty( $input['agreement_page_ids'] ) ) {
 			$ids                          = array_filter( array_map( 'intval', explode( ',', $input['agreement_page_ids'] ) ) );
@@ -101,6 +110,19 @@ class SettingsPage {
 				type="checkbox" 
 				name="' . esc_attr( Settings::OPTION_NAME ) . '[replace_wp_login]" value="1" 
 				' . checked( true, ! empty( Settings::getOption( 'replace_wp_login' ) ), false ) . '
+			> Enable
+		</label>';
+	}
+
+	/**
+	 * Render checkbox field
+	 */
+	public function field_use_slr_css() {
+		echo '<label>
+			<input 
+				type="checkbox" 
+				name="' . esc_attr( Settings::OPTION_NAME ) . '[use_slr_css]" value="1" 
+				' . checked( true, Settings::getOption( 'use_slr_css', true ), false ) . '
 			> Enable
 		</label>';
 	}

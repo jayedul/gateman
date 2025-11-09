@@ -2,6 +2,9 @@ module.exports=require('react-materials/builders/build-release')({
 	vendor: true,
 	exclude: [
 		'vendor/devjk/wp-toolkit/components',
+		'vendor/devjk/wp-toolkit/src/DB.php',
+		'vendor/devjk/wp-toolkit/src/Updater.php',
+		'vendor/devjk/wp-toolkit/src/Dispatcher.php',
 		'vendor/devjk/wp-toolkit/package.json',
 		'vendor/devjk/wp-toolkit/package-lock.json',
 		'vendor/devjk/wp-toolkit/.eslintignore',

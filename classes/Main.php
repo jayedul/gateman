@@ -11,7 +11,6 @@ use DevJK\SLR\Setup\Scripts;
 use DevJK\SLR\Setup\SettingsPage;
 use DevJK\SLR\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
-use DevJK\WPToolkit\Dispatcher;
 use DevJK\WPToolkit\Utilities;
 
 /**
@@ -58,12 +57,6 @@ class Main {
 		new Redirect();
 		new SettingsPage();
 		new PageFlag();
-
-		// Register ajax endpoints
-		new Dispatcher(
-			self::$configs->app_id,
-			array()
-		);
 	}
 
 	/**

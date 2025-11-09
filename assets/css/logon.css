@@ -38,3 +38,89 @@
 	justify-content: space-between;
 	column-gap: 15px;
 }
+
+/* Input styles */
+/* Input Field */
+.slr-use-css .slr-input {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1f2937;
+  background-color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.slr-use-css .slr-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.slr-use-css .slr-input:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+
+/* Checkbox */
+.slr-use-css .slr-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+}
+
+.slr-use-css .slr-checkbox:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.slr-use-css .slr-checkbox:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Button */
+.slr-use-css .slr-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: #3b82f6;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  outline: none;
+}
+
+.slr-use-css .slr-button:hover {
+  background-color: #2563eb;
+}
+
+.slr-use-css .slr-button:active {
+  transform: scale(0.98);
+}
+
+.slr-use-css .slr-button:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.slr-use-css .slr-button:disabled {
+  background-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.slr-use-css .slr-button:disabled:hover {
+  background-color: #d1d5db;
+}
