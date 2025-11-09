@@ -7,77 +7,80 @@ use DevJK\SLR\Models\Settings;
 if (! defined('ABSPATH') ) { exit;
 }
 
-    // $current_form, $error_message
+    // $current_page, $error_message
 
-    $field_data   = Logon::getFields($current_form);
-    $current_page = 'slr_' . $current_form;
+    $field_data   = Logon::getFields( str_replace( 'slr_', '', $current_page ) );
     $fields       = $field_data['fields'] ?? array();
     $submit       = $field_data['submit'] ?? array();
     $reg_enabled  = ! empty(get_option('users_can_register'));
 ?>
 
 <?php if(is_user_logged_in() && (int) ( sanitize_text_field($_GET['reauth'] ?? '') ) !== 1 ) : ?>
-    <form class="slr-logon-form <?php esc_attr_e($current_form); ?> slr-logged-in">
+    <form class="slr-logon-form slr-logged-in">
         <div class="slr-logged-in">
-    <?php echo esc_html(apply_filters('slr_already_logged_in_message', __('You are already logged in.', 'slr'))); ?>
+    		<?php echo esc_html(apply_filters('slr_already_logged_in_message', __('You are already logged in.', 'slr'))); ?> <br/>
+			<?php echo sprintf( __( 'Want to %sLogout%s?', 'slr' ), '<a href="' . wp_logout_url() . '">', '</a>'); ?>
         </div>
     </form>
     <?php return; 
 endif; ?>
 
 <?php if(! $reg_enabled && $current_page === Pages::REGISTRATION->value ) : ?>
-    <form class="slr-logon-form <?php esc_attr_e($current_form); ?> slr-logged-in">
+    <form class="slr-logon-form slr-registration-disabled">
         <div class="slr-logged-in">
-    <?php echo esc_html(apply_filters('slr_reg_disabled_message', __('Registration is disabled.', 'slr'))); ?>
+    		<?php echo esc_html(apply_filters('slr_reg_disabled_message', __('Registration is disabled.', 'slr'))); ?>
         </div>
     </form>
-    <?php return; 
-endif; ?>
+<?php return; endif; ?>
 
-<form class="slr-logon-form <?php esc_attr_e($current_form); ?>" method="POST" enctype="multipart/form-data">
+<form class="slr-logon-form <?php esc_attr_e($current_page); ?>" method="POST" enctype="multipart/form-data">
 
-    <?php do_action('slr_fields_before', $current_form); ?>
+    <?php do_action('slr_fields_before', $current_page); ?>
 
     <?php foreach ( $fields as $name => $field ): ?>
-        <?php do_action('slr_field_before_' . $name, $current_form); ?>
+        <?php do_action('slr_field_before_' . $name, $current_page); ?>
         <?php $label_id = 'slr_field_id_' . $name; ?>
         <div>
             <label for="<?php esc_attr_e($label_id) ?>">
-        <?php echo esc_html(apply_filters('slr_field_label_' . $name, $field['label'], $current_form)); ?>
+        <?php echo esc_html(apply_filters('slr_field_label_' . $name, $field['label'], $current_page)); ?>
             </label>
             <input 
                 id="<?php esc_attr_e($label_id) ?>"
                 name="<?php esc_attr_e($name); ?>"
                 value="<?php $field['type'] !== 'password' ? esc_attr_e(sanitize_text_field($_POST[ $name ] ?? $_GET[ $name ] ?? '')) : ''; ?>"
                 type="<?php esc_attr_e($field['type']); ?>" 
-                placeholder="<?php esc_attr_e(apply_filters('slr_field_placeholder_' . $name, $field['placeholder'], $current_form)); ?>"
+                placeholder="<?php esc_attr_e(apply_filters('slr_field_placeholder_' . $name, $field['placeholder'], $current_page)); ?>"
         <?php echo ( $field['disabled'] ?? false ) === true ? 'disabled="disabled"' : ''; ?>
             />
         </div>
-        <?php do_action('slr_field_after' . $name, $current_form); ?>
+        <?php do_action('slr_field_after' . $name, $current_page); ?>
     <?php endforeach; ?>
 
-    <?php do_action('slr_fields_after', $current_form); ?>
+    <?php do_action('slr_fields_after', $current_page); ?>
 
     <?php if (empty($fields) ) : ?>
-        <span><?php echo esc_html('Invalid form', 'slr'); ?></span>
+        <span>
+			<?php echo esc_html('Invalid form', 'slr'); ?>
+		</span>
     <?php else: ?>
 
-        <?php if (! empty($error_message) ) : ?>
+        <?php if ( ! empty( $error_message ) ) : ?>
             <div class="slr-error-message">
-            <?php echo esc_html(strip_tags($error_message)); ?>
+            	<?php echo esc_html(strip_tags($error_message)); ?>
             </div>
         <?php endif; ?>
-        
+	
+		<input type="hidden" name="slr_form_submit" value="<?php esc_attr_e( $current_page ); ?>"/>
+		<?php wp_nonce_field(); ?>
+
         <div>
-            <input type="hidden" name="slr_form_submit" value="yes"/>
             <button type="submit">
-        <?php echo esc_html(apply_filters('slr_submit_button_label', $submit['label'], $current_form)); ?>
+        		<?php echo esc_html(apply_filters('slr_submit_button_label', $submit['label'], $current_page)); ?>
             </button>
         </div>
     <?php endif; ?>
 
-    <?php do_action('slr_submit_button_after', $current_form); ?>
+    <?php do_action('slr_submit_button_after', $current_page); ?>
 
     <div class="slr-form-nav-links">
         <?php if ($current_page === Pages::LOGIN->value ) : ?>
@@ -109,5 +112,5 @@ endif; ?>
     </div>
     
 
-    <?php do_action('slr_nav_links_after', $current_form); ?>
+    <?php do_action('slr_nav_links_after', $current_page); ?>
 </form>

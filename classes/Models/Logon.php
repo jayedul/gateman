@@ -48,20 +48,21 @@ class Logon {
 		);
 	}
 
-	public static function applyAction( string $form, array $args = array() ) {
+	public static function applyAction( Pages $form, array $args = array() ) {
 
-		switch ( $form ) {
+		switch ( $form->value ) {
 
 			// Make login
-			case 'login':
+			case Pages::LOGIN->value:
 				return self::makeLogin(
-					sanitize_text_field( $_POST['username'] ?? '' )( $_POST['password'] ?? '' ),
+					sanitize_text_field( $_POST['username'] ?? '' ),
+					( $_POST['password'] ?? '' ),
 					sanitize_text_field( $_POST['remember'] ?? '' ) === 'yes'
 				);
 			break;
 
 			// Make new use rregistration
-			case 'registration':
+			case Pages::REGISTRATION->value:
 				if ( empty( get_option( 'users_can_register' ) ) ) {
 					return array(
 						'type'    => 'error',
@@ -110,7 +111,7 @@ class Logon {
 				break;
 
 			// Send OTP code to reset password
-			case 'recover_password':
+			case Pages::RECOVER_PASSWORD->value:
 				$email        = sanitize_text_field( $_POST['email'] ?? '' );
 				$md5_mail     = md5( $email );
 				$rate_limit   = new RateLimit( 'otp-' . $md5_mail, 60, 2 );
@@ -132,22 +133,22 @@ class Logon {
 
 				wp_mail(
 					$email,
-					apply_filters( 'slr_otp_mail_subject', __( 'Password Reset OTP Code | ' . bloginfo( 'name' ) ), $email ),
+					apply_filters( 'slr_otp_mail_subject', __( 'Password Reset OTP Code | ' . get_bloginfo( 'name' ) ), $email ),
 					apply_filters( 'slr_otp_mail_body', sprintf( __( 'Your OTP code is %s', 'slr' ), $otp ), $otp )
 				);
 
 				return array(
 					'type' => 'redirect',
-					'to'   => add_query_arg( array( 'email' => $email ), Settings::getPagePermalink( Pages::RECOVER_PASSWORD ) ),
+					'to'   => add_query_arg( array( 'recovery_email' => $email ), Settings::getPagePermalink( Pages::RECOVER_PASSWORD ) ),
 				);
 				break;
 
 			// Reset password with OTP code and email.
-			case 'reset_password':
-				$otp          = sanitize_text_field( $_POST['otp'] ?? '' );
+			case Pages::RESET_PASSWORD->value:
+				$otp          = sanitize_text_field( $_POST['otp_code'] ?? '' );
 				$password     = $_POST['password'] ?? '';
 				$ret_pass     = $_POST['retype_password'] ?? '';
-				$email        = $_POST['email'];
+				$email        = sanitize_text_field( $_GET['recovery_email'] ?? '' );
 				$md5_mail     = md5( $email );
 				$rate_limit   = new RateLimit( 'otp-verify-' . $md5_mail, 60 * 2, 3 );
 				$rate_limited = $rate_limit->limit( true ) === true;
@@ -163,6 +164,13 @@ class Logon {
 				|| $trans_code !== $otp
 				|| ! email_exists( $email )
 				) {
+
+					error_log( var_export( $otp, true ) );
+					error_log( var_export( $email, true ) );
+					error_log( var_export( $password, true ) );
+					error_log( var_export( $trans_code, true ) );
+					error_log( var_export( email_exists( $email ), true ) );
+
 					return array(
 						'type'    => 'error',
 						'message' => $rate_limited ? __( 'Too many attempts', 'slr' ) : __( 'Invalid submission or session expired', 'slr' ),

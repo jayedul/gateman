@@ -74,7 +74,7 @@ return array(
 	),
 	'reset_password'   => array(
 		'fields' => array(
-			'email'           => array(
+			'recovery_email'           => array(
 				'label'       => __( 'Email', 'slr' ),
 				'placeholder' => __( 'Enter your email', 'slr' ),
 				'type'        => 'email',
