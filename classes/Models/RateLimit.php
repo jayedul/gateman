@@ -2,7 +2,7 @@
 
 namespace DevJK\SLR\Models;
 
-use SolidieLib\_Array;
+use DevJK\WPToolkit\_Array;
 
 class RateLimit {
 
