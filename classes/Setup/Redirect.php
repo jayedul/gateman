@@ -106,7 +106,7 @@ class Redirect {
 	 */
 	public function redirectWP() {
 
-		if ( empty( Settings::getOption( 'replace_wp_login' ) ) ) {
+		if ( empty( Settings::getOption( 'replace_wp_login' ) ) || in_array( ( $_GET['action'] ?? null ), array( 'logout' ) ) ) {
 			return;
 		}
 
