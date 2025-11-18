@@ -32,8 +32,8 @@ class SettingsPage {
 	 */
 	public function addPage() {
 		add_options_page(
-			__( 'Simple Login', 'gateman' ),
-			__( 'Simple Login', 'gateman' ),
+			__( 'Gateman Login', 'gateman' ),
+			__( 'Gateman Login', 'gateman' ),
 			'manage_options',
 			'simple-login',
 			array( $this, 'renderPage' )
@@ -52,7 +52,7 @@ class SettingsPage {
 
 		add_settings_section(
 			'simple_login_section',
-			__( 'Simple Login Settings', 'gateman' ),
+			__( 'Gateman Login Settings', 'gateman' ),
 			'__return_false',
 			'simple-login'
 		);
@@ -140,7 +140,7 @@ class SettingsPage {
 	public function renderPage() {
 		?>
 		<div class="wrap">
-			<h1>Simple Login Settings</h1>
+			<h1>Gateman Login Settings</h1>
 			<form method="post" action="options.php">
 				<?php
 				settings_fields( 'simple_login_group' );

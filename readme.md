@@ -1,4 +1,4 @@
-### Simple Login Registration
+### Gateman Login Registration
 
 Light weight WordPress plugin for login-registration functionalities without unnecessary heavy features.
 
