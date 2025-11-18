@@ -1,4 +1,4 @@
-.slr-logon-form {
+.gateman-logon-form {
 	max-width: 500px;
 	margin: 0 auto;
 	display: flex;
@@ -6,34 +6,34 @@
 	row-gap: 20px;
 }
 
-.slr-logon-form > label {
+.gateman-logon-form > label {
 	display: block;
 	font-weight: 500;
 	font-size: 16px;
 	margin: 0 0 5px;
 }
 
-.slr-logon-form input[type=text],
-.slr-logon-form input[type=email],
-.slr-logon-form input[type=password] {
+.gateman-logon-form input[type=text],
+.gateman-logon-form input[type=email],
+.gateman-logon-form input[type=password] {
 	display: block;
 	width: 100%;
 }
 
-.slr-logon-form button[type=submit] {
+.gateman-logon-form button[type=submit] {
 	display: block;
 	width: 100%;
 }
 
-.slr-logon-form .slr-logged-in {
+.gateman-logon-form .gateman-logged-in {
 	text-align: center;
 }
 
-.slr-logon-form .slr-error-message {
+.gateman-logon-form .gateman-error-message {
 	color: #aa0000;
 }
 
-.slr-form-nav-links {
+.gateman-form-nav-links {
 	display: flex;
 	justify-content: space-between;
 	column-gap: 15px;
@@ -41,7 +41,7 @@
 
 /* Input styles */
 /* Input Field */
-.slr-use-css .slr-input {
+.gateman-use-css .gateman-input {
   padding: 10px 12px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
@@ -55,12 +55,12 @@
   box-sizing: border-box;
 }
 
-.slr-use-css .slr-input:focus {
+.gateman-use-css .gateman-input:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.slr-use-css .slr-input:disabled {
+.gateman-use-css .gateman-input:disabled {
   background-color: #f3f4f6;
   color: #9ca3af;
   cursor: not-allowed;
@@ -68,7 +68,7 @@
 }
 
 /* Checkbox */
-.slr-use-css .slr-checkbox {
+.gateman-use-css .gateman-checkbox {
   width: 18px;
   height: 18px;
   border: 2px solid #d1d5db;
@@ -77,18 +77,18 @@
   accent-color: #3b82f6;
 }
 
-.slr-use-css .slr-checkbox:focus {
+.gateman-use-css .gateman-checkbox:focus {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
-.slr-use-css .slr-checkbox:disabled {
+.gateman-use-css .gateman-checkbox:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
 /* Button */
-.slr-use-css .slr-button {
+.gateman-use-css .gateman-button {
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
@@ -102,25 +102,25 @@
   outline: none;
 }
 
-.slr-use-css .slr-button:hover {
+.gateman-use-css .gateman-button:hover {
   background-color: #2563eb;
 }
 
-.slr-use-css .slr-button:active {
+.gateman-use-css .gateman-button:active {
   transform: scale(0.98);
 }
 
-.slr-use-css .slr-button:focus {
+.gateman-use-css .gateman-button:focus {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }
 
-.slr-use-css .slr-button:disabled {
+.gateman-use-css .gateman-button:disabled {
   background-color: #d1d5db;
   color: #9ca3af;
   cursor: not-allowed;
   transform: none;
 }
 
-.slr-use-css .slr-button:disabled:hover {
+.gateman-use-css .gateman-button:disabled:hover {
   background-color: #d1d5db;
 }

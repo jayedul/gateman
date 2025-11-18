@@ -1,6 +1,6 @@
 <?php
 
-namespace DevJK\SLR\Models;
+namespace DevJK\Gateman\Models;
 
 use DevJK\WPToolkit\_Array;
 
@@ -18,7 +18,7 @@ class RateLimit {
 	 * @param integer $validity In seconds
 	 */
 	public function __construct( string $event, $validity = 3600, $max_attempt = 3 ) {
-		$this->event       = 'slr-rate-limit-' . $event;
+		$this->event       = 'gateman-rate-limit-' . $event;
 		$this->validity    = $validity;
 		$this->max_attempt = $max_attempt;
 	}

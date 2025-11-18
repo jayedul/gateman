@@ -1,9 +1,9 @@
 <?php
 
-namespace DevJK\SLR\Setup;
+namespace DevJK\Gateman\Setup;
 
-use DevJK\SLR\Main;
-use DevJK\SLR\Models\Settings;
+use DevJK\Gateman\Main;
+use DevJK\Gateman\Models\Settings;
 
 class SettingsPage {
 
@@ -66,20 +66,20 @@ class SettingsPage {
 		);
 
 		add_settings_field(
-			'use_slr_css',
-			'Use SLR css (Uncheck to inherit style from theme)',
-			array( $this, 'field_use_slr_css' ),
+			'use_gateman_css',
+			'Use Gateman css',
+			array( $this, 'field_use_gateman_css' ),
 			'simple-login',
 			'simple_login_section'
 		);
 
-		add_settings_field(
+		/* add_settings_field(
 			'agreement_page_ids',
 			__( 'Agreement Page IDs (comma-separated)', 'gateman' ),
 			array( $this, 'field_agreement_page_ids' ),
 			'simple-login',
 			'simple_login_section'
-		);
+		); */
 	}
 
 	/**
@@ -89,7 +89,7 @@ class SettingsPage {
 		$output = array();
 
 		$output['replace_wp_login'] = ! empty( $input['replace_wp_login'] ) ? 1 : 0;
-		$output['use_slr_css']      = ! empty( $input['use_slr_css'] ) ? 1 : 0;
+		$output['use_gateman_css']      = ! empty( $input['use_gateman_css'] ) ? 1 : 0;
 
 		if ( ! empty( $input['agreement_page_ids'] ) ) {
 			$ids                          = array_filter( array_map( 'intval', explode( ',', $input['agreement_page_ids'] ) ) );
@@ -117,12 +117,12 @@ class SettingsPage {
 	/**
 	 * Render checkbox field
 	 */
-	public function field_use_slr_css() {
+	public function field_use_gateman_css() {
 		echo '<label>
 			<input 
 				type="checkbox" 
-				name="' . esc_attr( Settings::OPTION_NAME ) . '[use_slr_css]" value="1" 
-				' . checked( true, Settings::getOption( 'use_slr_css', true ), false ) . '
+				name="' . esc_attr( Settings::OPTION_NAME ) . '[use_gateman_css]" value="1" 
+				' . checked( true, Settings::getOption( 'use_gateman_css', true ), false ) . '
 			> Enable
 		</label>';
 	}

@@ -1,11 +1,11 @@
 <?php
 
-namespace DevJK\SLR\Setup;
+namespace DevJK\Gateman\Setup;
 
-use DevJK\SLR\Enums\Pages;
-use DevJK\SLR\Main;
-use DevJK\SLR\Models\Logon;
-use DevJK\SLR\Models\Settings;
+use DevJK\Gateman\Enums\Pages;
+use DevJK\Gateman\Main;
+use DevJK\Gateman\Models\Logon;
+use DevJK\Gateman\Models\Settings;
 
 class Shortcode {
 
@@ -44,7 +44,7 @@ class Shortcode {
 
 	public function processSubmit() {
 
-		if ( ! isset( $_POST['slr_form_submit'], $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) ) ) {
+		if ( ! isset( $_POST['gateman_form_submit'], $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) ) ) {
 			return;
 		}
 
@@ -55,7 +55,7 @@ class Shortcode {
 			}
 		}
 
-		$current_form = Pages::from( sanitize_text_field( wp_unslash( $_POST['slr_form_submit'] ) ) );
+		$current_form = Pages::from( sanitize_text_field( wp_unslash( $_POST['gateman_form_submit'] ) ) );
 		$current_form = ( $current_form === Pages::RECOVER_PASSWORD && ! empty( self::$input['recovery_email'] ?? '' ) ) ? Pages::RESET_PASSWORD : $current_form;
 		$atts         = Settings::getShortcodeAtts( $current_form );
 		$resp         = Logon::applyAction( $current_form, $atts );
@@ -79,7 +79,7 @@ class Shortcode {
 		$current_page  = $form->value;
 		$input_data    = self::$input;
 		$current_page  = ( $form === Pages::RECOVER_PASSWORD && ! empty( sanitize_text_field( self::$input['recovery_email'] ?? '' ) ) ) ? Pages::RESET_PASSWORD->value : $current_page;
-		$field_data    = Logon::getFields( str_replace( 'slr_', '', $current_page ) );
+		$field_data    = Logon::getFields( str_replace( 'gateman_', '', $current_page ) );
 		$fields        = $field_data['fields'] ?? array();
 		$submit        = $field_data['submit'] ?? array();
 		$reg_enabled   = ! empty( get_option( 'users_can_register' ) );

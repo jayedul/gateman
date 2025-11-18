@@ -1,9 +1,9 @@
 <?php
 
-namespace DevJK\SLR\Models;
+namespace DevJK\Gateman\Models;
 
-use DevJK\SLR\Enums\Pages;
-use DevJK\SLR\Setup\Shortcode;
+use DevJK\Gateman\Enums\Pages;
+use DevJK\Gateman\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 use DevJK\WPToolkit\_String;
 
@@ -25,7 +25,7 @@ class Logon {
 			$fields = _Array::getArray( $fields );
 		}
 
-		return apply_filters( 'slr_form_fields', ( ! empty( $form ) ? _Array::getArray( $fields[ $form ] ?? array() ) : $fields ), $form );
+		return apply_filters( 'gateman_form_fields', ( ! empty( $form ) ? _Array::getArray( $fields[ $form ] ?? array() ) : $fields ), $form );
 	}
 
 	public static function getUniqueUsername( $username ) {
@@ -99,7 +99,7 @@ class Logon {
 				}
 
 				// Prepare the display name.
-				$user_id = wp_insert_user( apply_filters( 'slr_register_user_data', $form ) );
+				$user_id = wp_insert_user( apply_filters( 'gateman_register_user_data', $form ) );
 				if ( is_wp_error( $user_id ) ) {
 					return array(
 						'type'    => 'error',
@@ -130,14 +130,14 @@ class Logon {
 
 				// Generate the OTP, store and send to mail
 				$otp = str_shuffle( strtoupper( substr( _String::getRandomString( '', '' ), 1, 8 ) ) );
-				set_transient( 'slr_otp_' . $md5_mail, $otp, 60 * 30 );
+				set_transient( 'gateman_otp_' . $md5_mail, $otp, 60 * 30 );
 
 				wp_mail(
 					$email,
 					// translators: 1: Site title
-					apply_filters( 'slr_otp_mail_subject', sprintf( __( 'Password Reset OTP Code | %s', 'gateman' ), get_bloginfo( 'name' ) ), $email ),
+					apply_filters( 'gateman_otp_mail_subject', sprintf( __( 'Password Reset OTP Code | %s', 'gateman' ), get_bloginfo( 'name' ) ), $email ),
 					// translators: 1: OTP code
-					apply_filters( 'slr_otp_mail_body', sprintf( __( 'Your OTP code is %s', 'gateman' ), $otp ), $otp )
+					apply_filters( 'gateman_otp_mail_body', sprintf( __( 'Your OTP code is %s', 'gateman' ), $otp ), $otp )
 				);
 
 				return array(
@@ -155,7 +155,7 @@ class Logon {
 				$md5_mail     = md5( $email );
 				$rate_limit   = new RateLimit( 'otp-verify-' . $md5_mail, 60 * 2, 3 );
 				$rate_limited = $rate_limit->limit( true ) === true;
-				$trans_code   = get_transient( 'slr_otp_' . $md5_mail );
+				$trans_code   = get_transient( 'gateman_otp_' . $md5_mail );
 
 				$rate_limit->log();
 

@@ -2,10 +2,10 @@
 /**
  * Manage URL redirects
  */
-namespace DevJK\SLR\Setup;
+namespace DevJK\Gateman\Setup;
 
-use DevJK\SLR\Enums\Pages;
-use DevJK\SLR\Models\Settings;
+use DevJK\Gateman\Enums\Pages;
+use DevJK\Gateman\Models\Settings;
 
 /**
  * Redirect class

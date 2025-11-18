@@ -1,9 +1,9 @@
 <?php
 
-	use DevJK\SLR\Enums\Pages;
-	use DevJK\SLR\Models\Logon;
-	use DevJK\SLR\Models\Settings;
-	use DevJK\SLR\Setup\Shortcode;
+	use DevJK\Gateman\Enums\Pages;
+	use DevJK\Gateman\Models\Logon;
+	use DevJK\Gateman\Models\Settings;
+	use DevJK\Gateman\Setup\Shortcode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <?php if ( is_user_logged_in() && (int) ( sanitize_text_field( Shortcode::$input['reauth'] ?? '' ) ) !== 1 ) : ?>
-	<form class="slr-logon-form slr-logged-in">
-		<div class="slr-logged-in">
+	<form class="gateman-logon-form gateman-logged-in">
+		<div class="gateman-logged-in">
 			<?php
-				echo esc_html( apply_filters( 'slr_already_logged_in_message', __( 'You are already logged in.', 'gateman' ) ) );
+				echo esc_html( apply_filters( 'gateman_already_logged_in_message', __( 'You are already logged in.', 'gateman' ) ) );
 			?>
-			 <br/>
+			<br/>
 			<?php
 				// translators: 1: Acnhor tag start, 2: Anchor tag end
 				echo sprintf( esc_html__( 'Want to %1$sLogout%2$s?', 'gateman' ), '<a href="' . esc_attr( wp_logout_url() ) . '">', '</a>' );
@@ -31,9 +31,9 @@ endif;
 ?>
 
 <?php if ( ! $reg_enabled && $current_page === Pages::REGISTRATION->value ) : ?>
-	<form class="slr-logon-form slr-registration-disabled">
-		<div class="slr-logged-in">
-			<?php echo esc_html( apply_filters( 'slr_reg_disabled_message', __( 'Registration is disabled.', 'gateman' ) ) ); ?>
+	<form class="gateman-logon-form gateman-registration-disabled">
+		<div class="gateman-logged-in">
+			<?php echo esc_html( apply_filters( 'gateman_reg_disabled_message', __( 'Registration is disabled.', 'gateman' ) ) ); ?>
 		</div>
 	</form>
 	<?php
@@ -41,35 +41,35 @@ endif;
 endif;
 ?>
 
-<form class="slr-logon-form 
+<form class="gateman-logon-form 
 <?php
 echo esc_attr( $current_page ) . ' ';
-echo Settings::getOption( 'use_slr_css', true ) ? 'slr-use-css' : '';
+echo Settings::getOption( 'use_gateman_css', true ) ? 'gateman-use-css' : '';
 ?>
 " method="POST" enctype="multipart/form-data">
 
-	<?php do_action( 'slr_fields_before', $current_page ); ?>
+	<?php do_action( 'gateman_fields_before', $current_page ); ?>
 
-	<?php foreach ( $fields as $slr_name => $slr_field ) : ?>
-		<?php do_action( 'slr_field_before_' . $slr_name, $current_page ); ?>
+	<?php foreach ( $fields as $gateman_name => $gateman_field ) : ?>
+		<?php do_action( 'gateman_field_before_' . $gateman_name, $current_page ); ?>
 		<div>
-			<label for="<?php echo esc_attr( 'slr_field_id_' . $slr_name ); ?>">
-		<?php echo esc_html( apply_filters( 'slr_field_label_' . $slr_name, $slr_field['label'], $current_page ) ); ?>
+			<label for="<?php echo esc_attr( 'gateman_field_id_' . $gateman_name ); ?>">
+		<?php echo esc_html( apply_filters( 'gateman_field_label_' . $gateman_name, $gateman_field['label'], $current_page ) ); ?>
 			</label>
 			<input 
-				id="<?php echo esc_attr( 'slr_field_id_' . $slr_name ); ?>"
-				class="slr-input"
-				name="<?php echo esc_attr( $slr_name ); ?>"
-				value="<?php $slr_field['type'] !== 'password' ? esc_attr( sanitize_text_field( Shortcode::$input[ $slr_name ] ?? '' ) ) : ''; ?>"
-				type="<?php echo esc_attr( $slr_field['type'] ); ?>" 
-				placeholder="<?php echo esc_attr( apply_filters( 'slr_field_placeholder_' . $slr_name, $slr_field['placeholder'], $current_page ) ); ?>"
-		<?php echo ( $slr_field['disabled'] ?? false ) === true ? 'disabled="disabled"' : ''; ?>
+				id="<?php echo esc_attr( 'gateman_field_id_' . $gateman_name ); ?>"
+				class="gateman-input"
+				name="<?php echo esc_attr( $gateman_name ); ?>"
+				value="<?php $gateman_field['type'] !== 'password' ? esc_attr( sanitize_text_field( Shortcode::$input[ $gateman_name ] ?? '' ) ) : ''; ?>"
+				type="<?php echo esc_attr( $gateman_field['type'] ); ?>" 
+				placeholder="<?php echo esc_attr( apply_filters( 'gateman_field_placeholder_' . $gateman_name, $gateman_field['placeholder'], $current_page ) ); ?>"
+		<?php echo ( $gateman_field['disabled'] ?? false ) === true ? 'disabled="disabled"' : ''; ?>
 			/>
 		</div>
-		<?php do_action( 'slr_field_after' . $slr_name, $current_page ); ?>
+		<?php do_action( 'gateman_field_after' . $gateman_name, $current_page ); ?>
 	<?php endforeach; ?>
 
-	<?php do_action( 'slr_fields_after', $current_page ); ?>
+	<?php do_action( 'gateman_fields_after', $current_page ); ?>
 
 	<?php if ( empty( $fields ) ) : ?>
 		<span>
@@ -78,24 +78,24 @@ echo Settings::getOption( 'use_slr_css', true ) ? 'slr-use-css' : '';
 	<?php else : ?>
 
 		<?php if ( ! empty( $error_message ) ) : ?>
-			<div class="slr-error-message">
+			<div class="gateman-error-message">
 				<?php echo esc_html( wp_strip_all_tags( $error_message ) ); ?>
 			</div>
 		<?php endif; ?>
 	
-		<input type="hidden" name="slr_form_submit" value="<?php echo esc_attr( $current_page ); ?>"/>
+		<input type="hidden" name="gateman_form_submit" value="<?php echo esc_attr( $current_page ); ?>"/>
 		<?php wp_nonce_field(); ?>
 
 		<div>
-			<button type="submit" class="slr-button">
-				<?php echo esc_html( apply_filters( 'slr_submit_button_label', $submit['label'], $current_page ) ); ?>
+			<button type="submit" class="gateman-button">
+				<?php echo esc_html( apply_filters( 'gateman_submit_button_label', $submit['label'], $current_page ) ); ?>
 			</button>
 		</div>
 	<?php endif; ?>
 
-	<?php do_action( 'slr_submit_button_after', $current_page ); ?>
+	<?php do_action( 'gateman_submit_button_after', $current_page ); ?>
 
-	<div class="slr-form-nav-links">
+	<div class="gateman-form-nav-links">
 		<?php if ( $current_page === Pages::LOGIN->value ) : ?>
 			<div>
 				<a href="<?php echo esc_attr( Settings::getPagePermalink( Pages::RECOVER_PASSWORD ) ); ?>">
@@ -125,5 +125,5 @@ echo Settings::getOption( 'use_slr_css', true ) ? 'slr-use-css' : '';
 	</div>
 	
 
-	<?php do_action( 'slr_nav_links_after', $current_page ); ?>
+	<?php do_action( 'gateman_nav_links_after', $current_page ); ?>
 </form>

@@ -1,8 +1,8 @@
 <?php
 
-namespace DevJK\SLR\Setup;
+namespace DevJK\Gateman\Setup;
 
-use DevJK\SLR\Main;
+use DevJK\Gateman\Main;
 
 class Scripts {
 
@@ -12,6 +12,6 @@ class Scripts {
 	}
 
 	public function loadFormScripts() {
-		wp_enqueue_style( 'slr-logon-form', Main::$configs->url . 'assets/css/logon.css', array(), Main::$configs->version );
+		wp_enqueue_style( 'gateman-logon-form', Main::$configs->url . 'assets/css/logon.css', array(), Main::$configs->version );
 	}
 }

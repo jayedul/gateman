@@ -1,15 +1,15 @@
 <?php
 /**
- * Init SLR plugin
+ * Init Gateman plugin
  */
-namespace DevJK\SLR;
+namespace DevJK\Gateman;
 
-use DevJK\SLR\Setup\Installer;
-use DevJK\SLR\Setup\PageFlag;
-use DevJK\SLR\Setup\Redirect;
-use DevJK\SLR\Setup\Scripts;
-use DevJK\SLR\Setup\SettingsPage;
-use DevJK\SLR\Setup\Shortcode;
+use DevJK\Gateman\Setup\Installer;
+use DevJK\Gateman\Setup\PageFlag;
+use DevJK\Gateman\Setup\Redirect;
+use DevJK\Gateman\Setup\Scripts;
+use DevJK\Gateman\Setup\SettingsPage;
+use DevJK\Gateman\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 use DevJK\WPToolkit\Utilities;
 
@@ -65,6 +65,6 @@ class Main {
 	 * @return void
 	 */
 	public static function activate() {
-		do_action( 'slr_plugin_activated' );
+		do_action( 'gateman_plugin_activated' );
 	}
 }

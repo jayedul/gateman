@@ -1,11 +1,11 @@
 <?php
 
-namespace DevJK\SLR\Enums;
+namespace DevJK\Gateman\Enums;
 
 enum Pages:string {
 
-	case LOGIN            = 'slr_login';
-	case REGISTRATION     = 'slr_registration';
-	case RECOVER_PASSWORD = 'slr_recover_password';
-	case RESET_PASSWORD   = 'slr_reset_password';
+	case LOGIN            = 'gateman_login';
+	case REGISTRATION     = 'gateman_registration';
+	case RECOVER_PASSWORD = 'gateman_recover_password';
+	case RESET_PASSWORD   = 'gateman_reset_password';
 }

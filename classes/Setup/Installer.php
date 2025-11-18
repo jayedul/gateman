@@ -1,16 +1,16 @@
 <?php
 
-namespace DevJK\SLR\Setup;
+namespace DevJK\Gateman\Setup;
 
-use DevJK\SLR\Enums\Pages;
-use DevJK\SLR\Main;
-use DevJK\SLR\Models\Settings;
+use DevJK\Gateman\Enums\Pages;
+use DevJK\Gateman\Main;
+use DevJK\Gateman\Models\Settings;
 
 class Installer {
 
 
 	public function __construct() {
-		add_action( 'slr_plugin_activated', array( $this, 'createPages' ) );
+		add_action( 'gateman_plugin_activated', array( $this, 'createPages' ) );
 	}
 
 	public function createPages() {

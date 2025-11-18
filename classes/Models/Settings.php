@@ -1,19 +1,19 @@
 <?php
 
-namespace DevJK\SLR\Models;
+namespace DevJK\Gateman\Models;
 
-use DevJK\SLR\Enums\Pages;
-use DevJK\SLR\Setup\Shortcode;
+use DevJK\Gateman\Enums\Pages;
+use DevJK\Gateman\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 
 class Settings {
 
 
-	const PAGE_TYPE   = 'slr_page_type';
-	const OPTION_NAME = 'slr_plugin_settings';
+	const PAGE_TYPE   = 'gateman_page_type';
+	const OPTION_NAME = 'gateman_plugin_settings';
 
 	/**
-	 * Get SLR option value
+	 * Get Gateman option value
 	 *
 	 * @param string $key
 	 * @param mixed  $def
@@ -25,7 +25,7 @@ class Settings {
 	}
 
 	/**
-	 * Get SLR page ID. It creates page if not found.
+	 * Get Gateman page ID. It creates page if not found.
 	 *
 	 * @param Pages $page
 	 * @return integer
@@ -50,7 +50,7 @@ class Settings {
 
 			$page_id = wp_insert_post(
 				array(
-					'post_title'   => ucwords( str_replace( '_', ' ', str_replace( 'slr_', '', $page->value ) ) ),
+					'post_title'   => ucwords( str_replace( '_', ' ', str_replace( 'gateman_', '', $page->value ) ) ),
 					'post_content' => $shortcode,
 					'post_status'  => 'publish',
 					'post_type'    => 'page',
@@ -74,7 +74,7 @@ class Settings {
 	}
 
 	/**
-	 * Get page permalink for SLR
+	 * Get page permalink for Gateman
 	 *
 	 * @param Pages $page
 	 * @return string
@@ -93,7 +93,7 @@ class Settings {
 			$args['reauth'] = Shortcode::$input['reauth'];
 		}
 
-		return add_query_arg( apply_filters( 'slr_permalink_args', $args ), get_permalink( $page_id ) );
+		return add_query_arg( apply_filters( 'gateman_permalink_args', $args ), get_permalink( $page_id ) );
 	}
 
 	/**

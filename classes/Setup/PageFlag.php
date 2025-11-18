@@ -1,9 +1,9 @@
 <?php
 
-namespace DevJK\SLR\Setup;
+namespace DevJK\Gateman\Setup;
 
-use DevJK\SLR\Enums\Pages;
-use DevJK\SLR\Models\Settings;
+use DevJK\Gateman\Enums\Pages;
+use DevJK\Gateman\Models\Settings;
 
 class PageFlag {
 
@@ -23,15 +23,15 @@ class PageFlag {
 		switch ( $type ) {
 
 			case Pages::LOGIN->value:
-				$post_states['slr_login_page'] = __( 'SLR Login', 'gateman' );
+				$post_states['gateman_login_page'] = __( 'Gateman Login', 'gateman' );
 				break;
 
 			case Pages::REGISTRATION->value:
-				$post_states['slr_reg_page'] = __( 'SLR Registration', 'gateman' );
+				$post_states['gateman_reg_page'] = __( 'Gateman Registration', 'gateman' );
 				break;
 
 			case Pages::RECOVER_PASSWORD->value:
-				$post_states['slr_recvr_page'] = __( 'SLR Recover Pass', 'gateman' );
+				$post_states['gateman_recvr_page'] = __( 'Gateman Recover Pass', 'gateman' );
 				break;
 		}
 

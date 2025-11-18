@@ -2,7 +2,7 @@
 /**
  * fields.php
  *
- * @package devjk/slr
+ * @package devjk/gateman
  */
 
 return array(

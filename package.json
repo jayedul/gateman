@@ -1,6 +1,6 @@
 {
   "name": "gateman",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple Login Registration plugin for WordPress",
   "main": "index.js",
   "scripts": {
