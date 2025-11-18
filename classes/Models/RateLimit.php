@@ -31,7 +31,7 @@ class RateLimit {
 			if ( $ret === true ) {
 				return true;
 			}
-			wp_send_json_error( array( 'message' => __( 'Too many invalid attempt encountered. Try later.', 'simple-login-registration' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Too many invalid attempt encountered. Try later.', 'gateman' ) ) );
 		}
 	}
 

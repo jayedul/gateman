@@ -32,8 +32,8 @@ class SettingsPage {
 	 */
 	public function addPage() {
 		add_options_page(
-			__( 'Simple Login', 'simple-login-registration' ),
-			__( 'Simple Login', 'simple-login-registration' ),
+			__( 'Simple Login', 'gateman' ),
+			__( 'Simple Login', 'gateman' ),
 			'manage_options',
 			'simple-login',
 			array( $this, 'renderPage' )
@@ -52,7 +52,7 @@ class SettingsPage {
 
 		add_settings_section(
 			'simple_login_section',
-			__( 'Simple Login Settings', 'simple-login-registration' ),
+			__( 'Simple Login Settings', 'gateman' ),
 			'__return_false',
 			'simple-login'
 		);
@@ -75,7 +75,7 @@ class SettingsPage {
 
 		add_settings_field(
 			'agreement_page_ids',
-			__( 'Agreement Page IDs (comma-separated)', 'simple-login-registration' ),
+			__( 'Agreement Page IDs (comma-separated)', 'gateman' ),
 			array( $this, 'field_agreement_page_ids' ),
 			'simple-login',
 			'simple_login_section'

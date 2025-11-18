@@ -1,4 +1,4 @@
-=== Simple Login Registration ===
+=== Gateman - Simple Login Registration ===
 Contributors: jayedul
 Tags: login, registration, authentication
 Requires at least: 5.3
@@ -7,7 +7,7 @@ Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 
-A light weight login-registration plugin without unnecessary heavy features.
+A lightweight login and registration plugin designed without unnecessary bloat. Just the essential features you need for a smooth user experience.
 
 == Description ==
 
@@ -15,7 +15,7 @@ Simple Login Registration plugin with only login, registration, password recover
 
 == Changelog ==
 
-= 1.0.0 - Nov 09, 2025
+= 1.0.0 - Nov 19, 2025
 
 New: Login
 New: Registration
@@ -27,4 +27,4 @@ New: Filter and action hooks for high flexibility
 == Upgrade Notice ==
 
 No worry about switching the plugin version. 
-Want to contribute? Here's the repository https://github.com/jayedul/simple-login-registration
+Want to contribute? Here's the repository https://github.com/jayedul/gateman

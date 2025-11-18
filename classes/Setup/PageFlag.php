@@ -23,15 +23,15 @@ class PageFlag {
 		switch ( $type ) {
 
 			case Pages::LOGIN->value:
-				$post_states['slr_login_page'] = __( 'SLR Login', 'simple-login-registration' );
+				$post_states['slr_login_page'] = __( 'SLR Login', 'gateman' );
 				break;
 
 			case Pages::REGISTRATION->value:
-				$post_states['slr_reg_page'] = __( 'SLR Registration', 'simple-login-registration' );
+				$post_states['slr_reg_page'] = __( 'SLR Registration', 'gateman' );
 				break;
 
 			case Pages::RECOVER_PASSWORD->value:
-				$post_states['slr_recvr_page'] = __( 'SLR Recover Pass', 'simple-login-registration' );
+				$post_states['slr_recvr_page'] = __( 'SLR Recover Pass', 'gateman' );
 				break;
 		}
 

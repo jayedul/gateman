@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name: Simple Login Registration
- * Plugin URI: https://wordpress.org/plugins/simple-login-registration/
- * Description: Light weight login and registration plugin without unnecessary heavy fatures.
+ * Plugin Name: Gateman Login
+ * Plugin URI: https://wordpress.org/plugins/gateman/
+ * Description: A lightweight login and registration plugin designed without unnecessary bloat. Just the essential features you need for a smooth user experience.
  * Version: 1.0.0
  * Author: JK
  * Author URI: https://www.linkedin.com/in/jayedulk/
  * Requires at least: 5.3
  * Requires PHP: 7.4
  * License: GPLv2 or later
- * Text Domain: simple-login-registration
+ * Text Domain: gateman
  *
  * @package devjk/slr
  */

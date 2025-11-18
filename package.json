@@ -1,5 +1,5 @@
 {
-  "name": "simple-login-registration",
+  "name": "gateman",
   "version": "1.0.0",
   "description": "Simple Login Registration plugin for WordPress",
   "main": "index.js",

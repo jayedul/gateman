@@ -46,7 +46,7 @@ class Main {
 		// Prepare runtime data
 		$manifest              = _Array::getManifestArray( self::$configs->file, ARRAY_A );
 		self::$configs         = (object) array_merge( $manifest, (array) self::$configs );
-		self::$configs->app_id = Utilities::getAppId( trailingslashit( get_home_url() ) . 'wp-content/plugins/simple-login-registration/' );
+		self::$configs->app_id = Utilities::getAppId( trailingslashit( get_home_url() ) . 'wp-content/plugins/gateman/' );
 
 		// Register Activation/Deactivation Hook
 		register_activation_hook( self::$configs->file, array( $this, 'activate' ) );

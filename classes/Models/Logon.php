@@ -67,7 +67,7 @@ class Logon {
 				if ( empty( get_option( 'users_can_register' ) ) ) {
 					return array(
 						'type'    => 'error',
-						'message' => __( 'Registration is disabled', 'simple-login-registration' ),
+						'message' => __( 'Registration is disabled', 'gateman' ),
 					);
 				}
 
@@ -94,7 +94,7 @@ class Logon {
 				) {
 					return array(
 						'type'    => 'error',
-						'message' => __( 'All fields are required', 'simple-login-registration' ),
+						'message' => __( 'All fields are required', 'gateman' ),
 					);
 				}
 
@@ -124,7 +124,7 @@ class Logon {
 				if ( $rate_limited || ! email_exists( $email ) ) {
 					return array(
 						'type'    => 'error',
-						'message' => $rate_limited ? __( 'Too many attempt', 'simple-login-registration' ) : __( 'User does not exist', 'simple-login-registration' ),
+						'message' => $rate_limited ? __( 'Too many attempt', 'gateman' ) : __( 'User does not exist', 'gateman' ),
 					);
 				}
 
@@ -135,9 +135,9 @@ class Logon {
 				wp_mail(
 					$email,
 					// translators: 1: Site title
-					apply_filters( 'slr_otp_mail_subject', sprintf( __( 'Password Reset OTP Code | %s', 'simple-login-registration' ), get_bloginfo( 'name' ) ), $email ),
+					apply_filters( 'slr_otp_mail_subject', sprintf( __( 'Password Reset OTP Code | %s', 'gateman' ), get_bloginfo( 'name' ) ), $email ),
 					// translators: 1: OTP code
-					apply_filters( 'slr_otp_mail_body', sprintf( __( 'Your OTP code is %s', 'simple-login-registration' ), $otp ), $otp )
+					apply_filters( 'slr_otp_mail_body', sprintf( __( 'Your OTP code is %s', 'gateman' ), $otp ), $otp )
 				);
 
 				return array(
@@ -169,7 +169,7 @@ class Logon {
 				) {
 					return array(
 						'type'    => 'error',
-						'message' => $rate_limited ? __( 'Too many attempts', 'simple-login-registration' ) : __( 'Invalid submission or session expired', 'simple-login-registration' ),
+						'message' => $rate_limited ? __( 'Too many attempts', 'gateman' ) : __( 'Invalid submission or session expired', 'gateman' ),
 					);
 				}
 
@@ -183,7 +183,7 @@ class Logon {
 			default:
 				return array(
 					'type'    => 'error',
-					'message' => __( 'Invalid action', 'simple-login-registration' ),
+					'message' => __( 'Invalid action', 'gateman' ),
 				);
 				break;
 		}

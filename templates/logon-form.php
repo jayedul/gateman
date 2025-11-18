@@ -16,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<form class="slr-logon-form slr-logged-in">
 		<div class="slr-logged-in">
 			<?php
-				echo esc_html( apply_filters( 'slr_already_logged_in_message', __( 'You are already logged in.', 'simple-login-registration' ) ) );
+				echo esc_html( apply_filters( 'slr_already_logged_in_message', __( 'You are already logged in.', 'gateman' ) ) );
 			?>
 			 <br/>
 			<?php
 				// translators: 1: Acnhor tag start, 2: Anchor tag end
-				echo sprintf( esc_html__( 'Want to %1$sLogout%2$s?', 'simple-login-registration' ), '<a href="' . esc_attr( wp_logout_url() ) . '">', '</a>' );
+				echo sprintf( esc_html__( 'Want to %1$sLogout%2$s?', 'gateman' ), '<a href="' . esc_attr( wp_logout_url() ) . '">', '</a>' );
 			?>
 		</div>
 	</form>
@@ -33,7 +33,7 @@ endif;
 <?php if ( ! $reg_enabled && $current_page === Pages::REGISTRATION->value ) : ?>
 	<form class="slr-logon-form slr-registration-disabled">
 		<div class="slr-logged-in">
-			<?php echo esc_html( apply_filters( 'slr_reg_disabled_message', __( 'Registration is disabled.', 'simple-login-registration' ) ) ); ?>
+			<?php echo esc_html( apply_filters( 'slr_reg_disabled_message', __( 'Registration is disabled.', 'gateman' ) ) ); ?>
 		</div>
 	</form>
 	<?php
@@ -73,7 +73,7 @@ echo Settings::getOption( 'use_slr_css', true ) ? 'slr-use-css' : '';
 
 	<?php if ( empty( $fields ) ) : ?>
 		<span>
-			<?php echo esc_html( 'Invalid form', 'simple-login-registration' ); ?>
+			<?php echo esc_html( 'Invalid form', 'gateman' ); ?>
 		</span>
 	<?php else : ?>
 
@@ -99,26 +99,26 @@ echo Settings::getOption( 'use_slr_css', true ) ? 'slr-use-css' : '';
 		<?php if ( $current_page === Pages::LOGIN->value ) : ?>
 			<div>
 				<a href="<?php echo esc_attr( Settings::getPagePermalink( Pages::RECOVER_PASSWORD ) ); ?>">
-			<?php esc_html_e( 'Forgot password?', 'simple-login-registration' ); ?>
+			<?php esc_html_e( 'Forgot password?', 'gateman' ); ?>
 				</a>
 			</div>
 			<div>
 			<?php if ( $reg_enabled ) : ?>
 					<a href="<?php echo esc_attr( Settings::getPagePermalink( Pages::REGISTRATION ) ); ?>">
-				<?php esc_html_e( 'Create account', 'simple-login-registration' ); ?>
+				<?php esc_html_e( 'Create account', 'gateman' ); ?>
 					</a>
 			<?php endif; ?>
 			</div>
 		<?php elseif ( $current_page === Pages::REGISTRATION->value ) : ?>
 			<div>
-			<?php esc_html_e( 'Have an account account?', 'simple-login-registration' ); ?> <a href="<?php echo esc_attr( Settings::getPagePermalink( Pages::LOGIN ) ); ?>">
-			<?php esc_html_e( 'Login Now', 'simple-login-registration' ); ?>
+			<?php esc_html_e( 'Have an account account?', 'gateman' ); ?> <a href="<?php echo esc_attr( Settings::getPagePermalink( Pages::LOGIN ) ); ?>">
+			<?php esc_html_e( 'Login Now', 'gateman' ); ?>
 				</a>
 			</div>
 		<?php elseif ( $current_page === Pages::RECOVER_PASSWORD->value || $current_page === Pages::RESET_PASSWORD->value ) : ?>
 			<div>
-				<?php esc_html_e( 'Remembered password?', 'simple-login-registration' ); ?> <a href="<?php echo esc_attr( Settings::getPagePermalink( Pages::LOGIN ) ); ?>">
-				<?php esc_html_e( 'Login Now', 'simple-login-registration' ); ?>
+				<?php esc_html_e( 'Remembered password?', 'gateman' ); ?> <a href="<?php echo esc_attr( Settings::getPagePermalink( Pages::LOGIN ) ); ?>">
+				<?php esc_html_e( 'Login Now', 'gateman' ); ?>
 					</a>
 			</div>
 		<?php endif; ?>

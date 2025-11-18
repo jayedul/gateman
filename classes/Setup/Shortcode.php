@@ -62,7 +62,7 @@ class Shortcode {
 
 		// Empty means
 		if ( $resp['type'] === 'error' ) {
-			$this->error_message = ! empty( $resp['message'] ) ? $resp['message'] : __( 'Something went wrong!', 'simple-login-registration' );
+			$this->error_message = ! empty( $resp['message'] ) ? $resp['message'] : __( 'Something went wrong!', 'gateman' );
 
 		} elseif ( $resp['type'] === 'redirect' ) {
 			$to = ! empty( $resp['to'] ) ? $resp['to'] : ( ! empty( self::$input['redirect_to'] ) ? sanitize_text_field( self::$input['redirect_to'] ) : get_home_url() );

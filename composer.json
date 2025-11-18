@@ -1,5 +1,5 @@
 {
-    "name": "devjk/simple-login-registration",
+    "name": "devjk/gateman",
     "license": "gpl-v3",
     "autoload": {
         "psr-4": {
