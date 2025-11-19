@@ -1,9 +1,9 @@
 <?php
 
-namespace DevJK\Gateman\Setup;
+namespace GatemanLogin\Setup;
 
-use DevJK\Gateman\Enums\Pages;
-use DevJK\Gateman\Models\Settings;
+use GatemanLogin\Enums\Pages;
+use GatemanLogin\Models\Settings;
 
 class PageFlag {
 

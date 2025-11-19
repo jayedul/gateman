@@ -1,11 +1,11 @@
 <?php
 
-namespace DevJK\Gateman\Setup;
+namespace GatemanLogin\Setup;
 
-use DevJK\Gateman\Enums\Pages;
-use DevJK\Gateman\Main;
-use DevJK\Gateman\Models\Logon;
-use DevJK\Gateman\Models\Settings;
+use GatemanLogin\Enums\Pages;
+use GatemanLogin\Main;
+use GatemanLogin\Models\Logon;
+use GatemanLogin\Models\Settings;
 
 class Shortcode {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace DevJK\Gateman\Setup;
+namespace GatemanLogin\Setup;
 
-use DevJK\Gateman\Main;
-use DevJK\Gateman\Models\Settings;
+use GatemanLogin\Main;
+use GatemanLogin\Models\Settings;
 
 class SettingsPage {
 
@@ -22,7 +22,7 @@ class SettingsPage {
 	 * @return array
 	 */
 	public function addSettingsLink( $links ) {
-		$settings_link = '<a href="options-general.php?page=simple-login">Settings</a>';
+		$settings_link = '<a href="options-general.php?page=gateman-login">Settings</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}
@@ -35,7 +35,7 @@ class SettingsPage {
 			__( 'Gateman Login', 'gateman' ),
 			__( 'Gateman Login', 'gateman' ),
 			'manage_options',
-			'simple-login',
+			'gateman-login',
 			array( $this, 'renderPage' )
 		);
 	}
@@ -45,40 +45,41 @@ class SettingsPage {
 	 */
 	public function regSettings() {
 		register_setting(
-			'simple_login_group',
+			'gateman_login_group',
 			Settings::OPTION_NAME,
 			array( 'sanitize_callback' => array( $this, 'sanitize' ) )
 		);
 
 		add_settings_section(
-			'simple_login_section',
+			'gateman_login_section',
 			__( 'Gateman Login Settings', 'gateman' ),
 			'__return_false',
-			'simple-login'
+			'gateman-login'
 		);
 
 		add_settings_field(
 			'replace_wp_login',
 			'Replace WP Login Page',
 			array( $this, 'field_replace_wp_login' ),
-			'simple-login',
-			'simple_login_section'
+			'gateman-login',
+			'gateman_login_section'
 		);
 
 		add_settings_field(
 			'use_gateman_css',
 			'Use Gateman css',
 			array( $this, 'field_use_gateman_css' ),
-			'simple-login',
-			'simple_login_section'
+			'gateman-login',
+			'gateman_login_section'
 		);
 
-		/* add_settings_field(
+		/*
+		 add_settings_field(
 			'agreement_page_ids',
 			__( 'Agreement Page IDs (comma-separated)', 'gateman' ),
 			array( $this, 'field_agreement_page_ids' ),
-			'simple-login',
-			'simple_login_section'
+			'gateman-login',
+			'gateman_login_section'
 		); */
 	}
 
@@ -89,7 +90,7 @@ class SettingsPage {
 		$output = array();
 
 		$output['replace_wp_login'] = ! empty( $input['replace_wp_login'] ) ? 1 : 0;
-		$output['use_gateman_css']      = ! empty( $input['use_gateman_css'] ) ? 1 : 0;
+		$output['use_gateman_css']  = ! empty( $input['use_gateman_css'] ) ? 1 : 0;
 
 		if ( ! empty( $input['agreement_page_ids'] ) ) {
 			$ids                          = array_filter( array_map( 'intval', explode( ',', $input['agreement_page_ids'] ) ) );
@@ -143,8 +144,8 @@ class SettingsPage {
 			<h1>Gateman Login Settings</h1>
 			<form method="post" action="options.php">
 				<?php
-				settings_fields( 'simple_login_group' );
-				do_settings_sections( 'simple-login' );
+				settings_fields( 'gateman_login_group' );
+				do_settings_sections( 'gateman-login' );
 				submit_button();
 				?>
 			</form>
@@ -156,7 +157,7 @@ class SettingsPage {
 	 * Get setting value helper
 	 */
 	public static function get_option( $key = null, $default = false ) {
-		$options = get_option( 'simple_login_settings', array() );
+		$options = get_option( 'gateman_login_settings', array() );
 		if ( $key === null ) {
 			return $options;
 		}
@@ -167,8 +168,8 @@ class SettingsPage {
 	 * Update setting value helper
 	 */
 	public static function update_option( $key, $value ) {
-		$options         = get_option( 'simple_login_settings', array() );
+		$options         = get_option( 'gateman_login_settings', array() );
 		$options[ $key ] = $value;
-		update_option( 'simple_login_settings', $options );
+		update_option( 'gateman_login_settings', $options );
 	}
 }

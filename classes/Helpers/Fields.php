@@ -1,9 +1,6 @@
 <?php
-/**
- * fields.php
- *
- * @package devjk/gateman
- */
+
+defined( 'ABSPATH' ) || exit;
 
 return array(
 	'login'            => array(

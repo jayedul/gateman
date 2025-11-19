@@ -1,6 +1,6 @@
 <?php
 
-namespace DevJK\Gateman\Enums;
+namespace GatemanLogin\Enums;
 
 enum Pages:string {
 

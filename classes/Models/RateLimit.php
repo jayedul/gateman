@@ -1,6 +1,6 @@
 <?php
 
-namespace DevJK\Gateman\Models;
+namespace GatemanLogin\Models;
 
 use DevJK\WPToolkit\_Array;
 

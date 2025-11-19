@@ -1,11 +1,9 @@
 <?php
-/**
- * Manage URL redirects
- */
-namespace DevJK\Gateman\Setup;
 
-use DevJK\Gateman\Enums\Pages;
-use DevJK\Gateman\Models\Settings;
+namespace GatemanLogin\Setup;
+
+use GatemanLogin\Enums\Pages;
+use GatemanLogin\Models\Settings;
 
 /**
  * Redirect class

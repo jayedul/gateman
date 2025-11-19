@@ -1,9 +1,8 @@
 <?php
 
-	use DevJK\Gateman\Enums\Pages;
-	use DevJK\Gateman\Models\Logon;
-	use DevJK\Gateman\Models\Settings;
-	use DevJK\Gateman\Setup\Shortcode;
+	use GatemanLogin\Enums\Pages;
+	use GatemanLogin\Models\Settings;
+	use GatemanLogin\Setup\Shortcode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -73,7 +72,7 @@ echo Settings::getOption( 'use_gateman_css', true ) ? 'gateman-use-css' : '';
 
 	<?php if ( empty( $fields ) ) : ?>
 		<span>
-			<?php echo esc_html( 'Invalid form', 'gateman' ); ?>
+			<?php echo esc_html__( 'Invalid form', 'gateman' ); ?>
 		</span>
 	<?php else : ?>
 

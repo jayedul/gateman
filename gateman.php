@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Gateman Login
+ * Plugin Name: Gateman - Simple Login Registration
  * Plugin URI: https://wordpress.org/plugins/gateman/
  * Description: A lightweight login and registration plugin designed without unnecessary bloat. Just the essential features you need for a smooth user experience.
  * Version: 1.0.1
@@ -14,7 +14,7 @@
  * @package devjk/gateman
  */
 
-use DevJK\Gateman\Main;
+use GatemanLogin\Main;
 
 defined('ABSPATH') || exit;
 

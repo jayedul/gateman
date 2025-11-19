@@ -1,11 +1,10 @@
 <?php
 
-namespace DevJK\Gateman\Setup;
+namespace GatemanLogin\Setup;
 
-use DevJK\Gateman\Main;
+use GatemanLogin\Main;
 
 class Scripts {
-
 
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'loadFormScripts' ) );

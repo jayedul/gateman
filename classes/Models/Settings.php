@@ -1,9 +1,9 @@
 <?php
 
-namespace DevJK\Gateman\Models;
+namespace GatemanLogin\Models;
 
-use DevJK\Gateman\Enums\Pages;
-use DevJK\Gateman\Setup\Shortcode;
+use GatemanLogin\Enums\Pages;
+use GatemanLogin\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 
 class Settings {

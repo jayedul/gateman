@@ -3,7 +3,7 @@
     "license": "gpl-v3",
     "autoload": {
         "psr-4": {
-      		"DevJK\\Gateman\\": "classes/"
+      		"GatemanLogin\\": "classes/"
 		}
     },
     "scripts": {

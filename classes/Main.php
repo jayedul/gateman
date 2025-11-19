@@ -1,15 +1,13 @@
 <?php
-/**
- * Init Gateman plugin
- */
-namespace DevJK\Gateman;
 
-use DevJK\Gateman\Setup\Installer;
-use DevJK\Gateman\Setup\PageFlag;
-use DevJK\Gateman\Setup\Redirect;
-use DevJK\Gateman\Setup\Scripts;
-use DevJK\Gateman\Setup\SettingsPage;
-use DevJK\Gateman\Setup\Shortcode;
+namespace GatemanLogin;
+
+use GatemanLogin\Setup\Installer;
+use GatemanLogin\Setup\PageFlag;
+use GatemanLogin\Setup\Redirect;
+use GatemanLogin\Setup\Scripts;
+use GatemanLogin\Setup\SettingsPage;
+use GatemanLogin\Setup\Shortcode;
 use DevJK\WPToolkit\_Array;
 use DevJK\WPToolkit\Utilities;
 
